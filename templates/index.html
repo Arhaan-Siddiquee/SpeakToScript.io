@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Speech to Text Converter</h1>
+        <input type="file" id="audio-upload" accept="audio/*">
+        <button onclick="convertSpeech()">Convert</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convertSpeech() {
+            const fileInput = document.getElementById('audio-upload');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('audio', file);
+
+            fetch('/convert', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.text) {
+                    document.getElementById('result').textContent = data.text;
+                } else if (data.error) {
+                    document.getElementById('result').textContent = data.error;
+                }
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'An error occurred';
+            });
+        }
+    </script>
+</body>
+</html>
