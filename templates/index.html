@@ -4,20 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speech to Text Converter</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Speech to Text Converter</h1>
-        <input type="file" id="audio-upload" accept="audio/*">
+        <div class="upload-area" id="upload-area">
+            <p>Drag and drop your audio file here or click to select one</p>
+            <input type="file" id="audio-upload" accept="audio/*" hidden>
+        </div>
         <button onclick="convertSpeech()">Convert</button>
         <p id="result"></p>
     </div>
 
     <script>
-        function convertSpeech() {
-            const fileInput = document.getElementById('audio-upload');
-            const file = fileInput.files[0];
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('audio-upload');
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        uploadArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = event.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', () => {
+            const files = fileInput.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            if (files.length > 0) {
+                convertSpeech(files[0]);
+            }
+        }
+
+        function convertSpeech(file) {
             const formData = new FormData();
             formData.append('audio', file);
 
