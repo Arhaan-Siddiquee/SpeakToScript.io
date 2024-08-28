@@ -8,10 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>SpeakToScript.io</h1>
+        <h1>Speech to Text Converter</h1>
         <div class="upload-area" id="upload-area">
             <p>Drag and drop your audio file here or click to select one</p>
             <input type="file" id="audio-upload" accept="audio/*" hidden>
+        </div>
+        <div id="language-select-box">
+            <select id="language-select">
+                <option value="en-US">English (US)</option>
+                <option value="es-ES">Spanish</option>
+                <option value="fr-FR">French</option>
+                <option value="de-DE">German</option>
+                <option value="zh-CN">Chinese (Mandarin)</option>
+                <!-- Add more languages as needed -->
+            </select>
         </div>
         <button onclick="convertSpeech()">Convert</button>
         <p id="result"></p>
@@ -20,6 +30,7 @@
     <script>
         const uploadArea = document.getElementById('upload-area');
         const fileInput = document.getElementById('audio-upload');
+        const languageSelect = document.getElementById('language-select');
 
         uploadArea.addEventListener('click', () => fileInput.click());
 
@@ -53,6 +64,7 @@
         function convertSpeech(file) {
             const formData = new FormData();
             formData.append('audio', file);
+            formData.append('language', languageSelect.value);
 
             fetch('/convert', {
                 method: 'POST',
