@@ -25,12 +25,16 @@
         </div>
         <button onclick="convertSpeech()">Convert</button>
         <p id="result"></p>
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+        </div>
     </div>
 
     <script>
         const uploadArea = document.getElementById('upload-area');
         const fileInput = document.getElementById('audio-upload');
         const languageSelect = document.getElementById('language-select');
+        const loading = document.getElementById('loading');
 
         uploadArea.addEventListener('click', () => fileInput.click());
 
@@ -66,6 +70,9 @@
             formData.append('audio', file);
             formData.append('language', languageSelect.value);
 
+            // Show loading spinner
+            loading.classList.remove('hidden');
+
             fetch('/convert', {
                 method: 'POST',
                 body: formData
@@ -80,6 +87,10 @@
             })
             .catch(error => {
                 document.getElementById('result').textContent = 'An error occurred';
+            })
+            .finally(() => {
+                // Hide loading spinner
+                loading.classList.add('hidden');
             });
         }
     </script>
