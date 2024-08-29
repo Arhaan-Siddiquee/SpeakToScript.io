@@ -2,6 +2,9 @@
 
 A simple web application for converting audio files to text using speech recognition. Built with Flask (Python) for the backend, and HTML/CSS for the frontend.
 
+<img src="https://eu-central.storage.cloudconvert.com/tasks/daba6dbe-946d-484f-9114-191237eb579c/speech.to.text.io.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20240829%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20240829T182038Z&X-Amz-Expires=86400&X-Amz-Signature=1410b5d651625bf2f3a49b76041058a584d900f9d001c27f2535089770e5a866&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%3D%22speech.to.text.io.webp%22&response-content-type=image%2Fwebp&x-id=GetObject" alt="Alt text" style="width: desired-width; height: desired-height;">
+
+
 ## Features
 
 - Upload audio files for conversion.
