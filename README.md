@@ -66,10 +66,6 @@ A simple web application for converting audio files to text using speech recogni
 
 A loading spinner is displayed during the conversion process to indicate that the application is working on the task.
 
-## Contributing
-
-Feel free to submit issues and pull requests if you find bugs or want to add new features. Please follow the contribution guidelines outlined in the `CONTRIBUTING.md` file.
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
